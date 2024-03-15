@@ -12,7 +12,7 @@ const FlightSearchBar = () => {
     };
 
     return (
-        <div className="flex  gap-[5px] relative w-full flex-no-wrap">
+        <div className="grid grid-cols-1 gap-[5px] w-full relative items-center  sm:grid-cols-2 md:grid-cols-6">
             <div className="bg-white p-4 rounded-l-lg shadow-md cursor-pointer">
                 <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none">From</label>
                 <input
@@ -61,8 +61,8 @@ const FlightSearchBar = () => {
                     <div className="p-2 cursor-pointer hover:bg-gray-100">Suggestion 1</div>
                 </div> */}
             </div>
-            <div className="bg-white p-4 flex-grow rounded-r-lg">
-                <label className='block text-gray-600 text-sm font-semibold leading-5 w-full'> Travellers and cabin class</label>
+            <div className="bg-white p-4 shadow-md cursor-pointer rounded-r-lg">
+                <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none"> Travellers and cabin class</label>
                 <input
                     id="autosuggest"
                     type="text"
@@ -73,7 +73,10 @@ const FlightSearchBar = () => {
                     <div className="p-2 cursor-pointer hover:bg-gray-100">Suggestion 1</div>
                 </div> */}
             </div>
-            <button className='bg-[#0000ff] p-4 text-white rounded-lg'>Search</button>
+            <div>
+                <button className='text-white bg-[#0000ff] focus:ring-4 focus:ring-[#0000ff] font-medium rounded-lg text-sm px-4 
+                lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none'>Search</button>
+            </div>
         </div>
 
     );

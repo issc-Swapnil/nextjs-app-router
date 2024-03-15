@@ -4,80 +4,73 @@ import Link from "next/link";
 
 const Header = () => {
 
-        // header state
-        const [isActive, setIsActive] = useState<boolean>(false);
+    const [isActive, setIsActive] = useState<boolean>(false);
+    const [collapse, setCollapse] = useState<boolean>(false)
+    // event listener
+    useEffect(() => {
+        const handleScroll = () => {
+            window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
+        };
 
-        // event listener
-        useEffect(() => {
-            const handleScroll = () => {
-                window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
-            };
-    
-            window.addEventListener("scroll", handleScroll);
-    
-            return () => {
-                window.removeEventListener("scroll", handleScroll);
-            };
-        }, []);
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    const handleCollapse = () => {
+        setCollapse(!collapse)
+    }
 
     return (
         <>
-            <header
-                  className={`${isActive ? "bg-white shadow-md" : "bg-none py-6 text-white"
-                } fixed w-full z-10 lg:px-8 transition-all`}
-                // className="fixed top-0 w-full  z-30 bg-white-500 transition-all shadow-md pt-0 pt-4"
-            >
-                <nav className="max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
-                    <div className="col-start-1 col-end-2 flex items-center">
-                        <h3>Flight</h3>
-                    </div>
-                    <ul className="hidden lg:flex col-start-4 col-end-8 text-black-500  items-center">
-                        <Link
-                            href="/about"
-                            className="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 a"
-                        >
-                            About
+            <header>
+                <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+                    <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+                        <Link href="/" className="flex items-center">
+                            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Logo" />
+                            <span className="self-center text-xl font-semibold whitespace-nowrap ">Flight</span>
                         </Link>
-                        <Link
-                            href="/contact"
-                            className="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 a"
-                        >
-                            Contact
-                        </Link>
-                    </ul>
-                    <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
-                        <Link href="/" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
-                            Sign In
-                        </Link>
-                        <Link href="/" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
-
-                            Sing Up
-                        </Link>
+                        <div className="flex items-center lg:order-2">
+                            <Link href="/login" className="text-gray-800  hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Log in</Link>
+                            <Link href="#" className="text-white bg-[#0000ff] focus:ring-4 focus:ring-[#0000ff] font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Get started</Link>
+                            <button data-collapse-toggle="mobile-menu-2" type="button"
+                                onClick={handleCollapse}
+                                className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden 
+                                hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                                aria-controls="mobile-menu-2"
+                                aria-expanded="false">
+                                <span className="sr-only">Open main menu</span>
+                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                        </div>
+                        <div className={`${!collapse ? 'hidden' : 'block'} justify-between items-center w-full lg:flex lg:w-auto lg:order-1`} id="mobile-menu-2">
+                            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 t text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0" aria-current="page">Home</Link>
+                                </li>
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0">Company</Link>
+                                </li>
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0">Marketplace</Link>
+                                </li>
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0">Features</Link>
+                                </li>
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0">Team</Link>
+                                </li>
+                                <li>
+                                    <Link href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0000ff] lg:p-0">Contact</Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </header>
-            {/* Mobile Navigation */}
-
-            <nav className="fixed lg:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t ">
-                <div className="bg-white-500 sm:px-3">
-                    <ul className="flex w-full justify-between items-center text-black-500">
-                    <Link
-                            href="/about"
-                            className="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 a"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 a"
-                        >
-                            Contact
-                        </Link>
-                       
-                    </ul>
-                </div>
-            </nav>
-            {/* End Mobile Navigation */}
         </>
     );
 };

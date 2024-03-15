@@ -43,8 +43,8 @@ export default function Home() {
 
   return (
     <main>
-      <div className=" bg-[#05203c] p-24">
-        <div className="mt-12">
+      <div className=" bg-[#05203c] px-4 lg:px-6 py-24">
+        <div className="mx-auto max-w-screen-xl">
           <h1 className='text-white mb-4 text-[2rem] font-[700]'>Millions of cheap prices. One simple search.</h1>
           <SearchBox />
         </div>
