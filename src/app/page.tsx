@@ -2,6 +2,7 @@
 import Header from "./components/Header";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import SearchBox from "./components/searchBox";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,42 +42,13 @@ export default function Home() {
   };
 
   return (
-    <>
-      <main className="flex  flex-col items-center justify-between p-24">
-        Welcome to Flight Search App.
-        <div className="max-w-md mx-auto p-4 bg-white rounded shadow-md">
-          <form onSubmit={handleSearchSubmit}>
-            <div className="flex items-center border-b border-b-2 border-teal-500 py-2">
-              <input
-                id="autocomplete"
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                placeholder="From"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                autoComplete="off"
-                list="suggestions"
-              />
-              <div>
-                {suggestions?.map((suggestion: any, index: number) => (
-                  <div
-                    key={index}
-                  >
-                    {suggestion?.airports?.map((airport: any, airportIndex: number) => (
-                      <div key={airportIndex} onClick={() => console.log(airport?.code)}
-                        style={{ cursor: 'pointer', padding: '5px' }}>
-                        <div>Airport name: {airport.name}</div>
-                        <div>Code: {airport.code}</div>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </form>
+    <main>
+      <div className=" bg-[#05203c] px-4 lg:px-6 py-24">
+        <div className="mx-auto max-w-screen-xl">
+          <h1 className='text-white mb-4 text-[2rem] font-[700]'>Millions of cheap prices. One simple search.</h1>
+          <SearchBox />
         </div>
-      </main>
-    </>
-
+      </div>
+    </main>
   );
 }
