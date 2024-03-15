@@ -1,12 +1,31 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Header = () => {
 
+        // header state
+        const [isActive, setIsActive] = useState<boolean>(false);
+
+        // event listener
+        useEffect(() => {
+            const handleScroll = () => {
+                window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
+            };
+    
+            window.addEventListener("scroll", handleScroll);
+    
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            };
+        }, []);
+
     return (
         <>
             <header
-                className="fixed top-0 w-full  z-30 bg-white-500 transition-all shadow-md pt-0 pt-4"
+                  className={`${isActive ? "bg-white shadow-md" : "bg-none py-6 text-white"
+                } fixed w-full z-10 lg:px-8 transition-all`}
+                // className="fixed top-0 w-full  z-30 bg-white-500 transition-all shadow-md pt-0 pt-4"
             >
                 <nav className="max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
                     <div className="col-start-1 col-end-2 flex items-center">
