@@ -3,7 +3,7 @@
 import SearchBox from "./components/searchBox";
 import PlaceCard from "./components/placeCard";
 
-export default function Home() {
+const Home: React.FC<{}> = () => {
   return (
     <main>
       {/* banner */}
@@ -19,8 +19,8 @@ export default function Home() {
         <div className="mx-auto max-w-screen-xl">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 ">
             {
-              [0, 1, 2, 3, 4, 5].map(() => (
-                <PlaceCard />
+              [0, 1, 2, 3, 4, 5].map((value) => (
+                <PlaceCard  key={value}/>
               ))
             }
           </div>
@@ -29,3 +29,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home

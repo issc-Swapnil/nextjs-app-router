@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Autosuggest from "./autoSuggest";
+import DatePicker from "./datePicker";
 
-const FlightSearchBar = () => {
+const FlightSearchBar: React.FC<{}> = () => {
     const [formData, setFormData] = useState({
         origin: '',
         destination: '',
         departureDate: '',
         returnDate: '',
         travelClass: '',
-        tripType: 'oneWay', 
+        tripType: 'oneWay',
     });
 
     const [errors, setErrors] = useState({
@@ -31,9 +32,17 @@ const FlightSearchBar = () => {
         });
     };
 
+    const onSelect = (value:string , name:string) => {
+        setFormData({ ...formData, origin: value })
+        setErrors({
+            ...errors,
+            [name]: '',
+        });
+    }
+
     const validateForm = () => {
         const newErrors: any = {};
-    
+
         Object.entries(formData).forEach(([fieldName, value]) => {
             if (value.trim() === '') {
                 newErrors[fieldName] = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
@@ -42,7 +51,7 @@ const FlightSearchBar = () => {
                 delete newErrors[fieldName];
             }
         });
-    
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -62,23 +71,20 @@ const FlightSearchBar = () => {
             <div className={`grid grid-cols-1  w-full h-full gap-[5px] relative items-center  ${formData.tripType === 'oneWay' ? 'md:grid-cols-5' : 'md:grid-cols-6'}`}>
                 <div className="bg-white p-4 h-full rounded-l-lg shadow-md cursor-pointer">
                     <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none">From</label>
-                    <Autosuggest onSelect={(value: string) => setFormData({ ...formData, origin: value })} />
+                    <Autosuggest onSelect={onSelect} name="origin" />
                     {errors?.origin && <span className="text-red-500 text-xs">{errors?.origin}</span>}
                 </div>
                 <div className="bg-white p-4 h-full shadow-md cursor-pointer">
                     <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none">To</label>
-                    <Autosuggest onSelect={(value: string) => setFormData({ ...formData, destination: value })} />
+                    <Autosuggest onSelect={onSelect} name="destination" />
                     {errors?.destination && <span className="text-red-500 text-xs">{errors?.destination}</span>}
                 </div>
                 <div className="bg-white p-4 h-full shadow-md cursor-pointer">
                     <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none">Depart</label>
-                    <input
+                    <DatePicker
                         name="departureDate"
                         value={formData.departureDate}
-                        onChange={handleChange}
-                        type="date"
-                        className="w-full   placeholder-gray-400 text-gray-800 border-0 focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out"
-                        placeholder="Country, city or airport"
+                        handleChange={handleChange}                    
                     />
                     {errors?.departureDate && <span className="text-red-500 text-xs">{errors?.departureDate}</span>}
                 </div>
@@ -86,13 +92,10 @@ const FlightSearchBar = () => {
                     style={{ display: formData.tripType === 'twoWay' ? 'block' : 'none' }}
                 >
                     <label htmlFor="autosuggest" className="text-gray-600 text-sm font-semibold py-2 pointer-events-none">Return</label>
-                    <input
+                    <DatePicker
                         name="returnDate"
                         value={formData.returnDate}
-                        onChange={handleChange}
-                        type="date"
-                        className="w-full   placeholder-gray-400 text-gray-800 border-0 focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out"
-                        placeholder="Country, city or airport"
+                        handleChange={handleChange}
                     />
                     {errors?.returnDate && <span className="text-red-500 text-xs">{errors?.returnDate}</span>}
                 </div>
@@ -117,30 +120,32 @@ const FlightSearchBar = () => {
             </div>
 
             <div className="p-4 h-full cursor-pointer text-white">
-                <div>
-                    <label htmlFor="oneWay" className="mr-2">
-                        <input
-                            type="radio"
-                            id="oneWay"
-                            name="tripType"
-                            value="oneWay"
-                            checked={formData.tripType === 'oneWay'}
-                            onChange={handleChange}
-                        />
-                        One Way
-                    </label>
-                    <label htmlFor="twoWay">
-                        <input
-                            type="radio"
-                            id="twoWay"
-                            name="tripType"
-                            value="twoWay"
-                            checked={formData.tripType === 'twoWay'}
-                            onChange={handleChange}
-                        />
-                        Two Way
-                    </label>
-                </div>
+                <label htmlFor="oneWay" className="inline-block pl-6 relative mr-4">
+                    <input
+                        className=" border-3 border-solid border-gray-700 rounded-3xl 
+                            cursor-pointer h-5 left-0 m-0 p-0 absolute top-0 inline-block w-5"
+                        type="radio"
+                        id="oneWay"
+                        name="tripType"
+                        value="oneWay"
+                        checked={formData.tripType === 'oneWay'}
+                        onChange={handleChange}
+                    />
+                    <span>One Way</span>
+                </label>
+                <label htmlFor="twoWay" className="inline-block pl-6 relative">
+                    <input
+                        className=" border-3 border-solid border-gray-700 rounded-3xl 
+                            cursor-pointer h-5 left-0 m-0 p-0 absolute top-0 inline-block w-5"
+                        type="radio"
+                        id="twoWay"
+                        name="tripType"
+                        value="twoWay"
+                        checked={formData.tripType === 'twoWay'}
+                        onChange={handleChange}
+                    />
+                    <span>Return</span>
+                </label>
             </div>
         </form>
     );

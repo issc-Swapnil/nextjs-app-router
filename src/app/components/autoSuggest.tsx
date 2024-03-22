@@ -1,29 +1,12 @@
 import React, { useState } from 'react';
+import { airports } from '../../utilis/airport'
 
 interface AutosuggestProps {
-      onSelect: (value: string) => void;
+    name: string
+    onSelect: (value: string, name: string) => void;
 }
 
-const countries = [
-    'United States',
-    'Canada',
-    'United Kingdom',
-    'Australia',
-    'Germany',
-    // Add more countries as needed
-];
-
-const cities = [
-    'New York City',
-    'Los Angeles',
-    'Toronto',
-    'London',
-    'Sydney',
-    'Berlin',
-    // Add more cities as needed
-];
-
-const Autosuggest: React.FC<AutosuggestProps> = ({ onSelect }) => {
+const Autosuggest: React.FC<AutosuggestProps> = ({ onSelect, name }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
@@ -33,31 +16,33 @@ const Autosuggest: React.FC<AutosuggestProps> = ({ onSelect }) => {
         if (value.trim() === '') {
             setSuggestions([]);
         } else {
-            const results = [...countries, ...cities].filter(item =>
-                item.toLowerCase().includes(value.toLowerCase())
-            );
+            const results = airports.filter(airport =>
+                airport.country.toLowerCase().includes(value.toLowerCase()) ||
+                airport.city.toLowerCase().includes(value.toLowerCase())
+            ).map(airport => airport.country + ', ' + airport.city);
             setSuggestions(results);
         }
     };
 
     const handleSelectSuggestion = (suggestion: string) => {
         setSearchTerm(suggestion);
-        onSelect(suggestion);
+        onSelect(suggestion, name);
         setSuggestions([]);
     };
 
     return (
         <div className="relative">
             <input
+                name={name}
                 autoFocus={true}
-                type="text"
+                type="search"
                 value={searchTerm}
                 onChange={handleInputChange}
                 placeholder="Country, city or airport"
                 className="w-full placeholder-gray-400 text-gray-800 border-0 focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out"
             />
             {suggestions.length > 0 && (
-                <ul className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-md">
+                <ul className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-md max-h-48 overflow-y-auto">
                     {suggestions.map((suggestion, index) => (
                         <li
                             key={index}
