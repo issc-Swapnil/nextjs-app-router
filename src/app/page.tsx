@@ -3,7 +3,7 @@
 import SearchBox from "./components/searchBox";
 import PlaceCard from "./components/placeCard";
 
-export default function Home() {
+const Home: React.FC<{}> = () => {
   return (
     <main>
       {/* banner */}
@@ -29,3 +29,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home
