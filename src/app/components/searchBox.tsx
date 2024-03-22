@@ -111,7 +111,7 @@ const FlightSearchBar = () => {
                     {errors?.travelClass && <span className="text-red-500 text-xs">{errors?.travelClass}</span>}
                 </div>
                 <button type="submit"
-                    className='text-white bg-[#0000ff] focus:ring-4 focus:ring-[#0000ff] font-medium rounded-r-lg  h-full text-sm p-4 focus:outline-none'>
+                    className='text-white bg-[#008dd2] focus:ring-4 focus:ring-[#008dd2] font-medium rounded-r-lg  h-full text-sm p-4 focus:outline-none'>
                     Search
                 </button>
             </div>
