@@ -30,12 +30,11 @@ const Header = () => {
                  ${isActive ? "bg-white py-4 shadow-md" : "bg-none py-6 text-white"} `}>
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link href="/" className="flex items-center">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Logo" />
-                            <span className="self-center text-xl font-semibold whitespace-nowrap ">Flight</span>
+                            <img src="../../logo.svg" className="mr-3 h-8 sm:h-12" alt="Logo" />
+                            
                         </Link>
                         <div className="flex items-center lg:order-2">
-                            <Link href="/login" className="hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Log in</Link>
-                            <Link href="#" className="text-white bg-[#0000ff] focus:ring-4 focus:ring-[#0000ff] font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Get started</Link>
+                            <Link href="#" className="text-white bg-[#008dd2] focus:ring-4 focus:ring-[#0000ff] font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Get started</Link>
                             <button data-collapse-toggle="mobile-menu-2" type="button"
                                 onClick={handleCollapse}
                                 className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden 
