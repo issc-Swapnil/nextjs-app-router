@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -30,7 +31,7 @@ const Header = () => {
                  ${isActive ? "bg-white py-4 shadow-md" : "bg-none py-6 text-white"} `}>
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link href="/" className="flex items-center">
-                            <img src="../../logo.svg" className="mr-3 h-8 sm:h-12" alt="Logo" />
+                            <Image src="../../logo.svg" className="mr-3 h-8 sm:h-12" alt="Logo" />
                             
                         </Link>
                         <div className="flex items-center lg:order-2">
