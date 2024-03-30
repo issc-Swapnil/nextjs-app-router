@@ -34,12 +34,17 @@ const FlightSearchBar: React.FC<{}> = () => {
     };
 
     const onSelect = (value:string , name:string) => {
-        setFormData({ ...formData, origin: value })
+        if (name === 'origin') {
+            setFormData({ ...formData, origin: value });
+        } else if (name === 'destination') {
+            setFormData({ ...formData, destination: value });
+        }
         setErrors({
             ...errors,
             [name]: '',
         });
     }
+    console.log("Form",formData);
 
     const validateForm = () => {
         const newErrors: any = {};

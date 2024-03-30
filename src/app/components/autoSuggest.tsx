@@ -10,6 +10,7 @@ const Autosuggest: React.FC<AutosuggestProps> = ({ onSelect, name }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
 
+    console.log(suggestions);
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSearchTerm(value);
@@ -18,8 +19,8 @@ const Autosuggest: React.FC<AutosuggestProps> = ({ onSelect, name }) => {
         } else {
             const results = airports.filter(airport =>
                 airport.country.toLowerCase().includes(value.toLowerCase()) ||
-                airport.city.toLowerCase().includes(value.toLowerCase())
-            ).map(airport => airport.country + ', ' + airport.city);
+                airport.city.toLowerCase().includes(value.toLowerCase()) || airport.code.toLowerCase().includes(value.toLowerCase())
+            ).map(airport => airport?.name +'('+airport?.code+')');
             setSuggestions(results);
         }
     };
