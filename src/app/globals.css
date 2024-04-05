@@ -7,3 +7,7 @@ label , input{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.hero{
+    background-image: url('../utilis/hero-banner.jpg');
+}

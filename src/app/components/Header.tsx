@@ -30,7 +30,7 @@ const Header: React.FC<{}> = () => {
                  ${isActive ? "bg-white py-4 shadow-md" : "bg-none py-6 text-white"} `}>
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link href="/" className="flex items-center">
-                            <Image src="../../logo.svg" className="mr-3 h-8 sm:h-12" alt="Logo"  width={50} height={50}/>
+                            <Image src="../../logo.svg" className="mr-3 h-8 sm:h-12" alt="Logo"  width={100} height={100}/>
                             
                         </Link>
                         <div className="flex items-center lg:order-2">
