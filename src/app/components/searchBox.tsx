@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Autosuggest from "./autoSuggest";
 import DatePicker from "./datePicker";
+import {  useRouter } from "next/navigation";
 
 const FlightSearchBar: React.FC<{}> = () => {
     const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ const FlightSearchBar: React.FC<{}> = () => {
         returnDate: '',
         travelClass: '',
     });
+
+    const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -67,6 +70,7 @@ const FlightSearchBar: React.FC<{}> = () => {
         e.preventDefault();
         if (validateForm()) {
             console.log('Search initiated:', formData);
+            router.push('/search')
         } else {
             console.log('Form validation failed');
         }
