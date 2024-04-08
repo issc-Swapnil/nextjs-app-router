@@ -1,10 +1,9 @@
-import FlightSearchBar from "../components/searchBox";
+"use client"
 import SearchCard from "../components/searchCard";
 
 export default function Search() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* <FlightSearchBar /> */}
 
       <div className="w-full flex flex-col items-start justify-start  border-[1px] border-[#E9E8FC] rounded-xl">
         <SearchCard
