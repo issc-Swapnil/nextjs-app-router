@@ -6,7 +6,8 @@ const PlaceCard: React.FC<{}> = () => {
         <Link href="/" target="_blank" rel="noreferrer"
             className="block w-full  rounded-lg overflow-hidden shadow-md hover:shadow-lg transition duration-300">
             <div className="relative">
-                <div className="bg-cover bg-center h-48" style={{ backgroundImage: "url('https://content.skyscnr.com/ec26cc7ac3371abc1b8ea45df0b88791/GettyImages-480882769.jpg')" }}></div>
+                <div className="bg-cover bg-center h-48" 
+                style={{ backgroundImage: "url('https://content.skyscnr.com/ec26cc7ac3371abc1b8ea45df0b88791/GettyImages-480882769.jpg')" }}></div>
             </div>
             <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">India</h3>
