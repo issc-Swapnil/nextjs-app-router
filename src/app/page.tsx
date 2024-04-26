@@ -1,7 +1,8 @@
 'use client'
 
 import SearchBox from "./components/searchBox";
-import PlaceCard from "./components/placeCard";
+import FlightDeals from "./components/FlightDeals";
+import Places from "./components/Places";
 
 const Home: React.FC<{}> = () => {
   return (
@@ -14,18 +15,19 @@ const Home: React.FC<{}> = () => {
         </div>
       </div>
 
-      {/* card list */}
-      <div className=" px-4 lg:px-6 py-8">
+      <div className="mt-[40px]">
         <div className="mx-auto max-w-screen-xl">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 ">
-            {
-              [0, 1, 2, 3, 4, 5].map((index:number) => (
-                <PlaceCard key={index} />
-              ))
-            }
-          </div>
+          <FlightDeals />
         </div>
       </div>
+
+      <div className="mt-[60px]">
+        <div className="mx-auto max-w-screen-xl">
+          <Places />
+        </div>
+      </div>
+
+
     </main>
   );
 }
